@@ -34,6 +34,10 @@ public class ProxyDemo {
 		for (Class temp : c) {// interface java.util.Collection 说明这个类实现了这个接口
 			System.out.println(temp);
 		}
+		//Constructor constructo1 =clazz.getConstructor(); clazz=Proxy没有public的无惨构造方法， Exception in thread "main" java.lang.NoSuchMethodException: com.sun.proxy.$Proxy0.<init>()
+		
+		//Object obj = constructo1.newInstance();
+	//	System.out.println("obj=="+obj); 
 		// 获取构造方法
 		Constructor constructor = clazz.getConstructor(InvocationHandler.class);
 
@@ -54,11 +58,11 @@ public class ProxyDemo {
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
 				// System.out.println(proxy);proxy是生成的代理类
-				return null;
+				return "调用了代理对象，直接返回了，没有调用method方法";
 			}
 		});// 代理实例调用方法时，内部调用InvocationHandler.invoke();我们需要吧呗代理的实例传进来以便代理类调用他的真正方法。
 			// 代理只是增强原接口的实现类，
-			// collection.add("test");
+			//System.out.println(collection.add("test")); 
 		Collection collection2 = (Collection) constructor.newInstance(new InvocationHandler() {
 			ArrayList list = new ArrayList();
 
